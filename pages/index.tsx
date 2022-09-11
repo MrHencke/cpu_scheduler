@@ -11,7 +11,9 @@ const Home: NextPage = () => {
 				<meta name='description' content='CPU Scheduler Visualizer' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-
+			<div className={styles.homeAnchor}>
+				<a href='https://www.hencke.dev'>← Home</a>
+			</div>
 			<main className={styles.main}>
 				<h1 className={styles.title}>Placeholder</h1>
 
