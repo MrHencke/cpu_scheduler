@@ -1,4 +1,4 @@
-import { Algorithms } from './algorithms.enum';
+import { Algorithms } from './types/algorithms.enum';
 import { Process } from './process';
 import {
 	getHighestPriority,

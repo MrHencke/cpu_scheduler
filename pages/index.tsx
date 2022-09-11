@@ -1,6 +1,6 @@
+import AlgoritmSelection from 'common/algorithmSelection';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -16,17 +16,7 @@ const Home: NextPage = () => {
 				<h1 className={styles.title}>Placeholder</h1>
 
 				<p className={styles.description}>Placeholder</p>
-
-				<div className={styles.grid}>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-				</div>
+				<AlgoritmSelection />
 			</main>
 
 			<footer className={styles.footer}></footer>

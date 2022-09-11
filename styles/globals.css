@@ -1,3 +1,5 @@
+@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";
+
 html,
 body {
   padding: 0;
@@ -21,6 +23,11 @@ a {
   }
   body {
     color: white;
-    background: black;
+    background: white;
   }
+}
+
+.full-width-container{
+  width: 90vw;
+  height: 70vh;
 }

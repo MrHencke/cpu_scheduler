@@ -1,4 +1,5 @@
 import { Process } from './process';
+import { Data, Results } from './types/results.interface';
 
 export const getLowestRemainingTime = (processes: Array<Process>): Process | null => {
 	return processes.reduce((prev: Process, current: Process) => {
@@ -31,6 +32,15 @@ export const shiftArray = <T>(array: Array<T>) => {
 	return [...rest, first];
 };
 
+export const generateResultsList = (processCount: number) => {
+	const keys = [...Array(processCount).keys()];
+	let results: Results = {};
+	keys.forEach((x) => {
+		results[x] = new Array<Data>();
+	});
+	return results;
+};
+
 export const testProcs = () => [
 	new Process(0, 5),
 	new Process(1, 3),
@@ -60,3 +70,15 @@ export const testProcsLateArrival = () => [
 	new Process(5, 6, 3),
 	new Process(6, 10),
 ];
+
+export const getEnumNames = (object: any) => {
+	const names = Object.values(object).filter((value) => typeof value === 'string') as string[];
+	return names.map((name, i) => {
+		return { label: name, value: i };
+	});
+};
+export const Color = () => {
+	const r = Math.random;
+	const col = () => (r() * 255).toFixed(1);
+	return `rgba(${col()},${col()},${col()},1)`;
+};

@@ -1,8 +1,8 @@
-import { Algorithms } from './algorithms.enum';
+import { Algorithms } from './types/algorithms.enum';
 import { AlgorithmMap } from './algorithms.map';
 import { Process } from './process';
-import { Result } from './result';
-import { shiftArray } from './util';
+import { generateResultsList, shiftArray } from './util';
+import { Results } from './types/results.interface';
 
 export class Scheduler {
 	private _processes: Process[];
@@ -13,28 +13,25 @@ export class Scheduler {
 	private _timeQuanta: number | undefined;
 	private _tickRate: number;
 	private _finishedCount: number;
-	private _processesLength: number;
-	private _results: Result[];
+	private _results: Results;
 	private _completed: boolean;
 
 	constructor(
 		processes: Process[],
 		preemptive: boolean = false,
 		algorithm: Algorithms,
-		tickRate: number = 1,
-		time: number = 0,
+		tickRate: number = 3,
 		timeQuanta: number | undefined = undefined
 	) {
 		this._processes = processes;
 		this._lastProcess = null;
 		this._preemptive = preemptive;
 		this._tickRate = tickRate;
-		this._time = time;
+		this._time = 0;
 		this._selectionFunction = AlgorithmMap[algorithm];
 		this._timeQuanta = timeQuanta;
 		this._finishedCount = 0;
-		this._processesLength = processes.length;
-		this._results = [];
+		this._results = generateResultsList(processes.length);
 		this._completed = false;
 	}
 
@@ -53,7 +50,7 @@ export class Scheduler {
 		if (
 			this._lastProcess === null ||
 			this._preemptive ||
-			this._time % (this._timeQuanta || 0) === 0
+			(this._timeQuanta && this._time % this._timeQuanta === 0)
 		) {
 			const filteredProcesses = this._processes.filter((x) => !x.isUnavailable());
 			if (filteredProcesses.length === 0) {
@@ -62,12 +59,8 @@ export class Scheduler {
 				currentProcess = selectionFunction(filteredProcesses);
 			}
 		}
-		if (currentProcess === null) {
-			this._results.push(new Result('None', this._time, this._time + this._tickRate));
-		} else {
-			this._results.push(
-				new Result(currentProcess._id, this._time, this._time + this._tickRate)
-			);
+		if (currentProcess !== null) {
+			this._results[currentProcess._id].push([this._time, this._time + this._tickRate]);
 			this._lastProcess = currentProcess;
 			currentProcess.decrementRemainingTime(this._time, this._tickRate);
 			if (currentProcess.hasCompleted) this.setProcessCompleted();
@@ -80,7 +73,7 @@ export class Scheduler {
 	private setProcessCompleted() {
 		this._finishedCount += 1;
 		this._lastProcess = null;
-		if (this._finishedCount === this._processesLength) {
+		if (this._finishedCount === this._processes.length) {
 			this._completed = true;
 		}
 	}
@@ -89,6 +82,9 @@ export class Scheduler {
 		return this._completed;
 	}
 
+	public get time() {
+		return this._time;
+	}
 	public get results() {
 		return this._results;
 	}
