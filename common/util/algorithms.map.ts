@@ -1,12 +1,12 @@
-import { Algorithms } from './types/algorithms.enum';
-import { Process } from './process';
 import {
 	getHighestPriority,
 	getLowestBurstTime,
 	getLowestRemainingTime,
 	getNextElement,
 	getNextElementInQueue,
-} from './util';
+} from '.'
+import { Process } from '../classes/process'
+import { Algorithms } from './algorithms.enum'
 
 export const AlgorithmMap: Record<Algorithms, (processes: Process[]) => Process | null> = {
 	[Algorithms.FCFS]: getNextElement,
@@ -14,4 +14,4 @@ export const AlgorithmMap: Record<Algorithms, (processes: Process[]) => Process 
 	[Algorithms.RRS]: getNextElementInQueue,
 	[Algorithms.PBS]: getHighestPriority,
 	[Algorithms.SJF]: getLowestBurstTime,
-};
+}

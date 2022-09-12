@@ -6,8 +6,22 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input{
+  background-color: white;
+  color: black
 }
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -28,6 +42,33 @@ a {
 }
 
 .full-width-container{
+  display: flex;
+  flex-direction: column;
   width: 90vw;
-  height: 70vh;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.settings-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 570px;
+  color: black;
+  background-color: rgb(241, 244, 246);
+  min-height: 15vh;
+  border-radius: 10px;
+}
+
+.process-container{
+  width: 400px;
+  color: black;
+  background-color: rgb(241, 244, 246);
+  min-height: 15vh;
+  border-radius: 10px;
+}
+.remove-button{
+  background-color: red;
+  border-radius: 20px;
+  padding: 2px;
 }

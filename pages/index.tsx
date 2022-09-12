@@ -1,29 +1,30 @@
-import AlgoritmSelection from 'common/algorithmSelection';
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.css'
+import AlgoritmSelection from 'common/components/algorithmSelection'
+import type { NextPage } from 'next'
+import Head from 'next/head'
 
 const Home: NextPage = () => {
 	return (
 		<div className={styles.container}>
 			<Head>
 				<title>CPU Scheduler Visualizer</title>
-				<meta name='description' content='CPU Scheduler Visualizer' />
-				<link rel='icon' href='/favicon.ico' />
+				<meta name="description" content="CPU Scheduler Visualizer" />
+				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className={styles.homeAnchor}>
-				<a href='https://www.hencke.dev'>← Home</a>
-			</div>
 			<main className={styles.main}>
-				<h1 className={styles.title}>Placeholder</h1>
+				<h1 className={styles.title}>CPU Scheduling Algorithm Visualizer</h1>
 
-				<p className={styles.description}>Placeholder</p>
 				<AlgoritmSelection />
 			</main>
 
-			<footer className={styles.footer}></footer>
+			<footer className={styles.footer}>
+				<span>
+					Made by <a href="https://hencke.dev">Hencke.dev</a>
+				</span>
+				<a href="https://github.com/mrhencke">GitHub</a>
+			</footer>
 		</div>
-	);
-};
+	)
+}
 
-export default Home;
+export default Home
