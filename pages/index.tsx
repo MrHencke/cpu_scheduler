@@ -7,8 +7,8 @@ const Home: NextPage = () => {
 	return (
 		<div className={styles.container}>
 			<Head>
-				<title>CPU Scheduler Visualizer</title>
-				<meta name="description" content="CPU Scheduler Visualizer" />
+				<title>CPU Scheduling Algorithm Visualizer</title>
+				<meta name="description" content="CPU Scheduling Algorithm Visualizer" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
