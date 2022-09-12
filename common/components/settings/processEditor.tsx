@@ -17,7 +17,7 @@ const ProcessEditor = ({
 }: ProcessEditorProps) => {
 	return (
 		<tr>
-			<td>P{id}</td>
+			<td style={{ textAlign: 'center' }}>P{id}</td>
 			<td>
 				<input
 					type="text"

@@ -1,5 +1,5 @@
-import Checkbox from './checkbox'
-import NumberSelect from './numberSelect'
+import Checkbox from '../checkbox'
+import NumberSelect from '../numberSelect'
 import ProcessSelect from './processSelect'
 import { getEnumNames } from 'common/util'
 import { Algorithms } from 'common/util/algorithms.enum'

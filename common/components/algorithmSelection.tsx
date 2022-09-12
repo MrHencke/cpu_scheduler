@@ -1,5 +1,4 @@
 import Parameters from './settings/parameters'
-import ProcessSelect from './settings/processSelect'
 import { Scheduler } from 'common/classes/scheduler'
 import Chart from 'common/components/chart'
 import { Algorithms } from 'common/util/algorithms.enum'

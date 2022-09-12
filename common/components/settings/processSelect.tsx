@@ -11,6 +11,7 @@ interface ProcessSelectProps {
 
 const ProcessSelect = ({ settings, setSettings }: ProcessSelectProps) => {
 	const isPriority = settings.algorithm === Algorithms.PBS
+
 	const setProcessSettings = (v: ProcessSettings, i: number) => {
 		const newProcesses = [...settings.processes]
 		newProcesses[i] = v
@@ -41,6 +42,7 @@ const ProcessSelect = ({ settings, setSettings }: ProcessSelectProps) => {
 							return (
 								<ProcessEditor
 									id={i}
+									key={i}
 									processSettings={x}
 									setProcessSettings={setProcessSettings}
 									removeProcess={removeProcess}
@@ -50,7 +52,9 @@ const ProcessSelect = ({ settings, setSettings }: ProcessSelectProps) => {
 						})}
 					</tbody>
 					<tfoot>
-						<button onClick={addNewProcess}>New</button>
+						<button className="add-button" onClick={addNewProcess}>
+							Add
+						</button>
 					</tfoot>
 				</table>
 			</div>

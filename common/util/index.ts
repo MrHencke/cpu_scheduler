@@ -21,7 +21,7 @@ export const getNextElement = (processes: Process[]): Process | null => {
 
 export const getHighestPriority = (processes: Array<Process>): Process | null => {
 	return processes.reduce((prev: Process, current: Process) => {
-		return prev.priority <= current.priority ? prev : current
+		return prev.priority >= current.priority ? prev : current
 	})
 }
 
@@ -56,3 +56,11 @@ export const getEnumNames = (object: any) => {
 		return { label: name, value: i }
 	})
 }
+
+export const testProcSettings = (): ProcessSettings[] => [
+	{ burstTime: 5, arrivalTime: 0, priority: 0 },
+	{ burstTime: 3, arrivalTime: 0, priority: 0 },
+	{ burstTime: 1, arrivalTime: 0, priority: 0 },
+	{ burstTime: 4, arrivalTime: 0, priority: 0 },
+	{ burstTime: 2, arrivalTime: 0, priority: 0 },
+]

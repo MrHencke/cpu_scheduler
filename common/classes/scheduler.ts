@@ -1,7 +1,7 @@
 import { Process } from './process'
 import { generateResultsList, processesFromSettings, shiftArray } from 'common/util'
 import { Algorithms } from 'common/util/algorithms.enum'
-import { AlgorithmMap } from 'common/util/algorithms.map'
+import { SelectionFunctionMap } from 'common/util/algorithms.map'
 import { Results } from 'common/util/results.interface'
 import { SchedulerSettings } from 'common/util/schedulerSettings.interface'
 
@@ -30,7 +30,7 @@ export class Scheduler {
 		this._tickRate = settings.tickRate
 		this._time = 0
 		this._timeQuantaTimer = 0
-		this._selectionFunction = AlgorithmMap[settings.algorithm]
+		this._selectionFunction = SelectionFunctionMap[settings.algorithm]
 		this._timeQuanta = settings.timeQuanta
 		this._isRoundRobin = settings.algorithm === Algorithms.RRS
 		this._finishedCount = 0
@@ -47,6 +47,8 @@ export class Scheduler {
 		}
 		return this._results
 	}
+
+	//Lord i am sorry for this unified spaghetti mess
 	incrementTime(selectionFunction: (processes: Process[]) => Process | null) {
 		this._unqueuedProcesses.forEach(x => x.checkArrival(this._time))
 		const newlyArrived = this._unqueuedProcesses.filter(x => x.hasArrived)
@@ -72,11 +74,11 @@ export class Scheduler {
 		}
 		if (this._isRoundRobin) this._timeQuantaTimer += 1
 		if (currentProcess !== null) {
-			const burstTime = currentProcess.decrementRemainingTime(this._time, this._tickRate)
+			const burstTime = currentProcess.decrementRemainingTime(this._tickRate)
 			this._results[currentProcess._id].push([this._time, this._time + burstTime])
 			this._lastProcess = currentProcess
 			if (currentProcess.hasCompleted) {
-				this.setProcessCompleted()
+				this.dequeue(currentProcess)
 			}
 			this._time += burstTime
 		} else {
@@ -84,8 +86,8 @@ export class Scheduler {
 		}
 	}
 
-	private setProcessCompleted() {
-		this._queuedProcesses = this._queuedProcesses.filter(x => !x.hasCompleted)
+	private dequeue(process: Process) {
+		this._queuedProcesses = this._queuedProcesses.filter(x => x !== process)
 		this._finishedCount += 1
 		this._lastProcess = null
 		if (this._isRoundRobin) this._timeQuantaTimer = 0
@@ -100,8 +102,5 @@ export class Scheduler {
 
 	public get time() {
 		return this._time
-	}
-	public get results() {
-		return this._results
 	}
 }

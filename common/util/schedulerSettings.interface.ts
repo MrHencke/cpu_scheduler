@@ -1,6 +1,6 @@
+import { testProcSettings } from '.'
 import { Algorithms } from './algorithms.enum'
 import { ProcessSettings } from './processSettings.interface'
-import { testProcSettings } from './testVars'
 
 export interface SchedulerSettings {
 	processes: ProcessSettings[]

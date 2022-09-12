@@ -8,7 +8,6 @@ export class Process {
 	private _hasCompleted: boolean
 	private _priority: number
 	private _hasArrived: boolean
-	private _completionTime: number
 
 	constructor(id: number, settings: ProcessSettings) {
 		this._id = id
@@ -18,15 +17,14 @@ export class Process {
 		this._hasArrived = settings.arrivalTime === 0
 		this._hasCompleted = false
 		this._priority = settings.priority || 0
-		this._completionTime = 0
 	}
 
-	decrementRemainingTime(currentTime: number, tickRate: number) {
+	decrementRemainingTime(tickRate: number) {
 		const remainingTime = this.remainingTime
 		const res = remainingTime - tickRate
 		if (res <= 0) {
 			this._remainingTime = 0
-			this.complete(currentTime + remainingTime)
+			this.complete()
 			return remainingTime
 		} else {
 			this._remainingTime = res
@@ -34,20 +32,12 @@ export class Process {
 		}
 	}
 
-	complete(completionTime: number) {
+	complete() {
 		this._hasCompleted = true
-		this._completionTime = completionTime
 	}
 
 	checkArrival(currentTime: number) {
 		if (this._arrivalTime <= currentTime) this._hasArrived = true
-	}
-
-	isUnavailable() {
-		return this._hasCompleted || !this._hasArrived
-	}
-	public get name() {
-		return `P${this._id}`
 	}
 
 	public get hasArrived(): boolean {
@@ -60,10 +50,6 @@ export class Process {
 
 	public get priority(): number {
 		return this._priority
-	}
-
-	public get completionTime(): number {
-		return this._completionTime
 	}
 
 	public get remainingTime(): number {

@@ -72,3 +72,7 @@ a {
   border-radius: 20px;
   padding: 2px;
 }
+.add-button{
+  background-color: green; 
+  border-radius: 10px;
+}
