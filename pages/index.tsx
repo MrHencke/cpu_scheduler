@@ -19,9 +19,8 @@ const Home: NextPage = () => {
 
 			<footer className={styles.footer}>
 				<span>
-					Made by <a href="https://hencke.dev">Hencke.dev</a>
+					Made by <a href="https://github.com/mrhencke">MrHencke</a>
 				</span>
-				<a href="https://github.com/mrhencke">GitHub</a>
 			</footer>
 		</div>
 	)
